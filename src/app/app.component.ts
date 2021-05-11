@@ -12,7 +12,7 @@ import { connecterModel, DiagramModel, nodeModel } from './diagram.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent{
+export class AppComponent {
   public DiagramData: DiagramModel;
 
   @ViewChild('diagram')
@@ -86,6 +86,7 @@ export class AppComponent{
     this.diagram.nodes.forEach((element) => {
       const nodeData: nodeModel = {
         id: element.id,
+        name: element.annotations[0] ? element.annotations[0].content : '',
         height: element.height,
         width: element.width,
         offsetX: element.offsetX,
@@ -97,6 +98,7 @@ export class AppComponent{
     this.diagram.connectors.forEach((element) => {
       const connectorData: connecterModel = {
         id: element.id,
+        name: element.annotations[0] ? element.annotations[0].content : '',
         sourceId: element.sourceID,
         destinationId: element.targetID,
       };
