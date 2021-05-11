@@ -3,8 +3,13 @@ import {
   DiagramComponent,
   NodeModel,
   ConnectorModel,
+  SymbolPaletteComponent,
   LinearGradientModel,
+  MarginModel,
+  PaletteModel,
+  SymbolInfo,
 } from '@syncfusion/ej2-angular-diagrams';
+import { ExpandMode } from '@syncfusion/ej2-navigations';
 import { connecterModel, DiagramModel, nodeModel } from './diagram.model';
 
 @Component({
@@ -14,7 +19,7 @@ import { connecterModel, DiagramModel, nodeModel } from './diagram.model';
 })
 export class AppComponent {
   public DiagramData: DiagramModel;
-
+  public expandMode: ExpandMode = 'Multiple';
   @ViewChild('diagram')
   public diagram: DiagramComponent;
   title = 'diagramDemo';
@@ -37,7 +42,123 @@ export class AppComponent {
     type: 'Linear',
   };
 
+  private flowshapes: NodeModel[] = [
+    {
+      id: 'Terminator',
+      shape: { type: 'Flow', shape: 'Terminator' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'Process',
+      shape: { type: 'Flow', shape: 'Process' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'Decision',
+      shape: { type: 'Flow', shape: 'Decision' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'Document',
+      shape: { type: 'Flow', shape: 'Document' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'PreDefinedProcess',
+      shape: { type: 'Flow', shape: 'PreDefinedProcess' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'PaperTap',
+      shape: { type: 'Flow', shape: 'PaperTap' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'DirectData',
+      shape: { type: 'Flow', shape: 'DirectData' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'SequentialData',
+      shape: { type: 'Flow', shape: 'SequentialData' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+    {
+      id: 'Sort',
+      shape: { type: 'Flow', shape: 'Sort' },
+      style: {
+        fill: '#cbcac4',
+        strokeColor: 'white',
+        gradient: this.linearGradient,
+      },
+    },
+  ];
+
+  private connectorSymbols: ConnectorModel[] = [
+    {
+      id: 'Link1',
+      type: 'Orthogonal',
+      sourcePoint: { x: 0, y: 0 },
+      targetPoint: { x: 60, y: 60 },
+      targetDecorator: {
+        shape: 'Arrow',
+        style: { strokeColor: '#757575', fill: '#757575' },
+      },
+      style: { strokeWidth: 1, strokeColor: '#757575' },
+    },
+  ];
+
+  public palettes: PaletteModel[] = [
+    {
+      id: 'flow',
+      expanded: true,
+      symbols: this.flowshapes,
+      iconCss: 'shapes',
+      title: 'Flow Shapes',
+    },
+    {
+      id: 'connectors',
+      expanded: true,
+      symbols: this.connectorSymbols,
+      iconCss: 'shapes',
+      title: 'Connectors',
+    },
+  ];
+
   public node: NodeModel = {
+    id : 'Terminator',
     offsetX: 250,
     offsetY: 250,
     width: 100,
@@ -51,25 +172,15 @@ export class AppComponent {
   };
 
   public connectors: ConnectorModel = {
-    style: {
-      strokeColor: '#6BA5D7',
-      fill: '#6BA5D7',
-      strokeWidth: 2,
-    },
+    id: 'Link1',
+    type: 'Orthogonal',
+    sourcePoint: { x: 0, y: 0 },
+    targetPoint: { x: 60, y: 60 },
     targetDecorator: {
-      style: {
-        fill: '#6BA5D7',
-        strokeColor: '#6BA5D7',
-      },
+      shape: 'Arrow',
+      style: { strokeColor: '#757575', fill: '#757575' },
     },
-    sourcePoint: {
-      x: 100,
-      y: 100,
-    },
-    targetPoint: {
-      x: 200,
-      y: 200,
-    },
+    style: { strokeWidth: 1, strokeColor: '#757575' },
   };
 
   public addNode() {
@@ -86,6 +197,7 @@ export class AppComponent {
     this.diagram.nodes.forEach((element) => {
       const nodeData: nodeModel = {
         id: element.id,
+        shape: element.shape.type,
         name: element.annotations[0] ? element.annotations[0].content : '',
         height: element.height,
         width: element.width,

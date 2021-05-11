@@ -1,14 +1,20 @@
-<button (click)="addNode()">ADD NODE</button>
 
-<button (click)="addConnector()">ADD Connector</button>
 <ejs-diagram
   id="diagram-container"
   #diagram
   id="diagram"
   width="100%"
-  height="500px"
+  height="400px"
   (propertyChange)="valuechange($event)"
 >
 </ejs-diagram>
+<button (click)="addNode()">ADD NODE</button>
 
-
+<button (click)="addConnector()">ADD Connector</button>
+<ejs-symbolpalette
+  id="symbolpalette"
+  [palettes]="palettes"
+  width="100%"
+  height="200px"
+>
+</ejs-symbolpalette>

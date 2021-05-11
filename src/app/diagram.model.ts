@@ -5,6 +5,7 @@ export interface DiagramModel {
 
 export interface nodeModel {
   id: string;
+  shape : string;
   name : string;
   offsetX : number;
   offsetY : number;

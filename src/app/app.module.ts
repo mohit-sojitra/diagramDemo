@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DiagramModule } from '@syncfusion/ej2-angular-diagrams';
+import { DiagramModule, SymbolPaletteModule } from '@syncfusion/ej2-angular-diagrams';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    SymbolPaletteModule,
     AppRoutingModule,
     DiagramModule,
   ],
