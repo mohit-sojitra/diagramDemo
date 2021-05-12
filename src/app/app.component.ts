@@ -158,7 +158,6 @@ export class AppComponent {
   ];
 
   public node: NodeModel = {
-    id : 'Terminator',
     offsetX: 250,
     offsetY: 250,
     width: 100,
@@ -172,7 +171,6 @@ export class AppComponent {
   };
 
   public connectors: ConnectorModel = {
-    id: 'Link1',
     type: 'Orthogonal',
     sourcePoint: { x: 0, y: 0 },
     targetPoint: { x: 60, y: 60 },
